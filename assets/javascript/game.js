@@ -35,7 +35,7 @@ var defenderHP="";
 var defenderAttack="";
 var defenderDefend="";
 var powerIncrementToUser="";
-var userId="";
+var userIsUnlocked= false;
 
 
 // Intergameplay
@@ -55,11 +55,14 @@ function initalize(){
 
 }
 
+// ********** Functions **********
 function unlockUser(){
 // User player and stats loaded on click
-$(".roaster").on("click", function() {
+$(".roaster").one("click", function() {
   // convert key to Int
+  $(this).removeClass("not-selected");
   var userPick = ($(this).attr("id"));
+  // $(this).toggle(".not-selected");
 
   var userId = userPick;
 
@@ -67,7 +70,10 @@ $(".roaster").on("click", function() {
   
   userFindInObj(userId);
 
+  userIsUnlocked = true;
+
 });
+}
 
 function userFindInObj(keyValue){
   
@@ -87,12 +93,11 @@ function userFindInObj(keyValue){
   console.log("user attack" + userAttack);
   console.log("User defend" + userDefend);
 
- }
-};
+ };
 
 // Defender stats
 function unlockDefender(){
-$(".roaster").on("click", function() {
+$(".not-selected").on("click", function() {
   var defenderPick = ($(this).attr("id"));
 
   var defenderId = defenderPick;
@@ -100,6 +105,9 @@ $(".roaster").on("click", function() {
   console.log(defenderId);
   
   defFindInObj(defenderId);
+
+   });
+}
 
 function defFindInObj(keyValue){
   
@@ -122,18 +130,26 @@ function defFindInObj(keyValue){
   console.log("defende defend " + defenderDefend);
   console.log("amount to increase user " + powerIncrementToUser);
 
-    }
-  })
-};
+  };
+ 
 
-// *******Main content****
+// *******Main content******
 // Insert Initialize function, calls userSelect which calls defenderSelect
 initalize();
 
-if()
-unlockUser();
+if(userIsUnlocked === true)
+{
+  unlockDefender();
+  console.log(userIsUnlocked);
+}
+else if (userIsUnlocked === false){
+  unlockUser();
+  console.log(userIsUnlocked);
+}
 
-unlockDefender();
+
+// maybe user a jquery class for locked 
+ 
 
 $("#attackBtn").on("click", function(){
 
