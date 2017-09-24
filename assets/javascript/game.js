@@ -14,7 +14,7 @@ roaster2: {
     defend: "10",
     powerIncrement: "5"
   },
-roaster3: {
+"roaster3": {
     name: "Blue Bottle",
     hp: "120",
     attack: "20",
@@ -22,65 +22,116 @@ roaster3: {
     powerIncrement: "9",
   },
 
- roaster4: {
+ "roaster4": {
     name: "Sight Glass",
     hp: "90",
     attack: "5",
     defend: "10",
     powerIncrement: "12",
 }
+};
+
+// Setup
+var userHP="";
+var userAttack="";
+var userDefend="";
+var powerIncrementToUser="";
+var defenderHP="";
+var defenderAttack="";
+var defenderDefend="";
+var userId="";
+
+
+// Intergameplay
+var hpCounter="";
+var defenderCounter="";
+var attackIncrementerCounter="";
+
+function initalize(){
+  var userHP=0;
+  var userAttack=0;
+  var userDefend=0;
+  var powerIncrementToUser=0;
+
+  var defenderHP=0;
+  var defenderAttack=0;
+  var defenderDefend=0;
+
 }
-
-// for(var i = 0; i < coffeeRoasters)
-
-var userHP=0;
-var userAttack=0;
-var userDefend=0;
-var userPowerIncrement=0;
-
-var defenderHP=0;
-var defenderAttack=0;
-var defenderDefend=0;
 
 // User player and stats loaded on click
 $(".roaster").on("click", function() {
-  var userPick = $(this).attr("id");
+  // convert key to Int
+  var userPick = ($(this).attr("id"));
 
-  var selection = roasterList [ userPick ];
+  var userId = userPick;
 
-  var userArr = Object.keys(selection).map(function (key) { return selection[key]; });
-
-  userHP = userArr[1];
-  userAttack= userArr[2];
-  userDefend=userArr[3];
-  userPowerIncrement=userArr[4];
-
-  console.log(userHP);
-  console.log(userAttack);
-  console.log(userDefend);
-  console.log(userPowerIncrement);
+  console.log(userId);
+  
+  findInObj(userId);
 
 });
 
-
-$(".roaster").on("click", function() {
-  var userPick = $(this).attr("id");
-
-  var selection = roasterList [ userPick ];
-
-  var defendArr = Object.keys(selection).map(function (key) { return selection[key]; });
-
-  defenderHP = defendArr[1];
-  defenderAttack= defendArr[2];
-  defenderDefend=defendArr[3];
+function findInObj(keyValue){
+  
+  var unlock = keyValue;
+  console.log(unlock);
+  
+  console.log(roasterList[keyValue]);
+};
 
 
-  console.log(userHP);
-  console.log(userAttack);
-  console.log(userDefend);
-  console.log(userPowerIncrement);
 
-});
+
+
+
+// Defender stas
+// function unlockDefender(){
+// $(".roaster").on("click", function() {
+//   var defenderPick = $(this).attr("id");
+
+//   var defenderSelection = roasterList [ defenderPick ];
+
+//   var defendArr = Object.keys(defenderSelection).map(function (key) { return defenderSelection[key];});
+
+
+//   console.log(defendArr);
+
+//   defenderHP = (defendArr[1]);
+//   defenderAttack = (defendArr[2]);
+//   defenderDefend = (defendArr[3]);
+//   powerIncrementToUser= (defendArr[4]);
+
+//   console.log(defenderHP);
+//   console.log(defenderAttack);
+//   console.log(defenderDefend);
+//   console.log(powerIncrementToUser);
+// })
+// };
+
+// *******Main content****
+// Insert Initialize function, calls userSelect which calls defenderSelect
+initalize();
+
+$("#attackBtn").on("click", function(){
+
+  // User Stats
+  hpCounter= userHP-defenderDefend
+  attackIncrementerCounter = attackIncrementerCounter + powerIncrementToUser
+
+
+  // Defender stats
+  defenderCounter= defenderHP- userAttack
+
+  console.log(hpCounter);
+  console.log(attackIncrementerCounter);
+  console.log(defenderCounter);
+})
+
+
+
+
+
 
 
 
